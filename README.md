@@ -1,8 +1,8 @@
 # Password generator
 
-|Author|Email|
-|-|-|
-|Dmytro Soloviov|[dmytro.soloviov@gmail.com](dmytro.soloviov@gmail.com)|
+| Author | Email |
+| --- | --- |
+| Dmytro Soloviov | [dmytro.soloviov@gmail.com](dmytro.soloviov@gmail.com) |
 
 ## Usage
 
@@ -49,4 +49,3 @@ Run tests
 
 1. Add tests
 2. Add argument parsing
-
