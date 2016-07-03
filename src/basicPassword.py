@@ -20,9 +20,8 @@ class BasicPassword(object):
             for option in self.options:
                 try:
                     table += getattr(string, option)
-                except AttributeError as err:
-                    print('ERROR: {0}'.format(err))
-
+                except AttributeError:
+                    pass
         else:
             return dict(enumerate(string.digits +
                                   string.lowercase +

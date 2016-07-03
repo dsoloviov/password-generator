@@ -12,12 +12,9 @@ def generate_password():
         length = 10
         params_mapper = {'-d': 'digits', '-l': 'lowercase',
                           '-u': 'uppercase', '-s': 'punctuation'}
-        if '--all' in sys.argv:
-            return False
-        else:
-            for key, value in params_mapper.iteritems():
-                if key in sys.argv:
-                    params.append(value)
+        for key, value in params_mapper.iteritems():
+            if key in sys.argv:
+                params.append(value)
         if '-N' in sys.argv:
             number = sys.argv[sys.argv.index('-N') + 1]
         if '-L' in sys.argv:

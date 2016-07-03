@@ -9,14 +9,14 @@
 ## Run from command line
 
 ```shell
-$ python pgen.py [-N <digit>] [-L <digit>] [--all] [-d] [-l] [-u] [-s]
+$ python pgen.py [-N <digit>] [-L <digit>] [-d] [-l] [-u] [-s]
 ```
 
 where:
 
 `-N <digit>` stands for number of passwords the tool produces. `-L <digit>` means the length of each password. If omitted, number of passwords is 1 with length equal 10.
 
-`-d` means that password would contain digits, `-l` - lower-case letters, `-u` - upper-case letters, `-s` - special symbols. `--all` means that password would contain all types of characters mentioned above. Using `--all` overrides other parameters (e.g. using `--all` and `-d` will return password containing all types of characters). If omitted, password will contain all types of characters.
+`-d` means that password would contain digits, `-l` - lower-case letters, `-u` - upper-case letters, `-s` - special symbols. If omitted, password will contain all types of characters.
 
 Example:
 
@@ -56,8 +56,6 @@ Password can contain only digits (0 - 9) and upper-case characters (A - Z).
 
 ## Tests
 
-Run tests
-
-## TODO
-
-1. Add tests
+```shell
+$ python -m unittest discover -v
+```
