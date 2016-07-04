@@ -5,7 +5,7 @@ from random import randint as r
 from src.basicPassword import BasicPassword
 
 
-def generate_password():
+def generate_password(number=1, length=10, params=False):
     def get_params():
         params = []
         number = 1
@@ -26,7 +26,7 @@ def generate_password():
     return p.get_password()
 
 
-def password(number, length, params=False):
+def password(number=1, length=10, params=False):
     p = BasicPassword(number, length, params)
     return p.get_password()
 

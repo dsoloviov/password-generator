@@ -63,4 +63,15 @@ $ python -m unittest discover -v
 ## TODO
 
 - Use argparse or something like that for command line argument parsing
-- More tests :)
+- More tests :) --- type of characters
+- Guarantee that chosen type of characters will be present in generated password
+
+```python
+import re
+import string
+special = string.punctuation
+re.findall('[a-z]', 'tEst!1')  # find all lowercase
+re.findall('[A-Z]', 'tEst!1')  # find all uppercase
+re.findall('[0-9]', 'tEst!1')  # find all digits
+re.findall('[%s]' % special, 'tEst!1')  # find all special
+```
