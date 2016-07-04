@@ -2,37 +2,30 @@
 
 import sys
 from random import randint as r
-from src.basicPassword import BasicPassword
+from src.worker import generatePassword
+from src.worker import checkLength
+
+LENGTH = 10
 
 
-def generate_password(number=1, length=10, params=False):
-    def get_params():
-        params = []
-        number = 1
-        length = 10
-        params_mapper = {'-d': 'digits', '-l': 'lowercase',
-                          '-u': 'uppercase', '-s': 'punctuation'}
-        for key, value in params_mapper.iteritems():
-            if key in sys.argv:
-                params.append(value)
-        if '-N' in sys.argv:
-            number = sys.argv[sys.argv.index('-N') + 1]
-        if '-L' in sys.argv:
-            length = sys.argv[sys.argv.index('-L') + 1]
-        return [int(number), int(length), params]
-
-    number, length, params = get_params()
-    p = BasicPassword(number, length, params)
-    return p.get_password()
-
-
-def password(number=1, length=10, params=False):
-    p = BasicPassword(number, length, params)
-    return p.get_password()
+def getpsw(length=LENGTH, params=[]):
+    params_mapper = {'-d': 'digits', '-l': 'lowercase',
+                     '-u': 'uppercase', '-s': 'punctuation'}
+    for key, value in params_mapper.iteritems():
+        if key in sys.argv:
+            params.append(value)
+    if '-L' in sys.argv:
+        try:
+            length = checkLength(sys.argv[sys.argv.index('-L') + 1])
+        except IndexError:
+            length = LENGTH
+    if length <= 0:
+        length = LENGTH
+    return generatePassword(length, params)
 
 
 if __name__ == '__main__':
-    passwords = generate_password()
+    password = getpsw()
     print('\n')
-    for each in passwords: print each
+    print password
     print('\n')

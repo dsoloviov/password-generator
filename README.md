@@ -6,17 +6,17 @@
 
 **WARNING: This tool is not supposed to be used as actual password generator.  It's written for learning purpose only.**
 
-## Run from command line
+## Command line
 
 ```shell
-$ python pgen.py [-N <digit>] [-L <digit>] [-d] [-l] [-u] [-s]
+$ python pgen.py [-L <digit>] [-d] [-l] [-u] [-s]
 ```
 
 where:
 
-`-N <digit>` stands for number of passwords the tool produces. `-L <digit>` means the length of each password. If omitted, number of passwords is 1 with length equal 10.
+`-L <digit>` stands for the length of password. If omitted, length equals 10.
 
-`-d` means that password would contain digits, `-l` - lower-case letters, `-u` - upper-case letters, `-s` - special symbols. If omitted, password will contain all types of characters.
+`-d` means that password will (guaranteed) contain digits, `-l` - lower-case letters, `-u` - upper-case letters, `-s` - special symbols. If omitted, password will contain all types of characters.
 
 Example:
 
@@ -26,20 +26,20 @@ $ python pgen.py -d -u
 
 Password can contain only digits and upper-case letters.
 
-## Usage as a module
+## Import module
 
 ```python
->>> from pgen import password
->>> password(number, length, params)
+>>> from pgen import getpsw
+>>> getpsw(length, params)
 ```
 
-where `number` is number of passwords to generate (**int**), `length` is password length (**int**), `params` is optional parameters (characters password should consist of).
+where `length` is password length (**int**), `params` is optional parameters (characters password should consist of).
 
-Returns list of passwords.
+Returns password string.
 
 #### Parameters
 
-If provided value is considered to be `False` (e.g. `False`, `0`, `[]`, `{}`, etc.) or omitted - all types of characters can be present in password (numbers, upper- and lower-case letters, special symbols). Otherwise, list or tuple of parameters should be provided:
+If provided value is considered to be `False` (e.g. `False`, `0`, `[]`, `{}`, etc.) or omitted - all types of characters will be present in password (numbers, upper- and lower-case letters, special symbols). Otherwise, list or tuple of parameters should be provided:
 
 ```python
 ['digits', 'lowercase', 'uppercase', 'punctuation']
@@ -63,15 +63,4 @@ $ python -m unittest discover -v
 ## TODO
 
 - Use argparse or something like that for command line argument parsing
-- More tests :) --- type of characters
-- Guarantee that chosen type of characters will be present in generated password
-
-```python
-import re
-import string
-special = string.punctuation
-re.findall('[a-z]', 'tEst!1')  # find all lowercase
-re.findall('[A-Z]', 'tEst!1')  # find all uppercase
-re.findall('[0-9]', 'tEst!1')  # find all digits
-re.findall('[%s]' % special, 'tEst!1')  # find all special
-```
+- Add missing tests
