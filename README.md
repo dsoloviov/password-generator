@@ -59,3 +59,8 @@ Password can contain only digits (0 - 9) and upper-case characters (A - Z).
 ```shell
 $ python -m unittest discover -v
 ```
+
+## TODO
+
+- Use argparse or something like that for command line argument parsing
+- More tests :)
