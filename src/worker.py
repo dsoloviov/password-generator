@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 from random import randint as simple_random
-import string
 from re import findall
+import string
 
 
 def generatePassword(length, params):
@@ -19,10 +19,7 @@ def generateTable(options):
     table = []
     if options:
         for option in options:
-            try:
-                table += getattr(string, option)
-            except AttributeError:
-                pass
+            table += getattr(string, option)
     else:
         return dict(enumerate(string.digits +
                               string.lowercase +
@@ -45,7 +42,7 @@ def isValid(password, options):
               'uppercase': 'A-Z',
               'punctuation': string.punctuation}
     if options:
-        for option in checkOptions(options):
+        for option in options:
             if not findall('[%s]' % mapper[option], password):
                 return False
     else:
@@ -70,7 +67,3 @@ def checkOptions(options):
             options.pop(options.index(option))
             checkOptions(options)  # recursion
     return options
-
-
-if __name__ == '__main__':
-    pass

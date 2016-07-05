@@ -9,14 +9,17 @@
 ## Command line
 
 ```shell
-$ python pgen.py [-L <digit>] [-d] [-l] [-u] [-s]
+$ python pgen.py [-h] [-L LENGTH] [-d] [-l] [-u] [-s]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -L LENGTH, --length LENGTH
+                        length of the password
+  -d, --digits          include digits
+  -l, --lowercase       include lowercase characters
+  -u, --uppercase       include uppercase characters
+  -s, --special         include special characters
 ```
-
-where:
-
-`-L <digit>` stands for the length of password. If omitted, length equals 10.
-
-`-d` means that password will (guaranteed) contain digits, `-l` - lower-case letters, `-u` - upper-case letters, `-s` - special symbols. If omitted, password will contain all types of characters.
 
 Example:
 
@@ -29,8 +32,8 @@ Password can contain only digits and upper-case letters.
 ## Import module
 
 ```python
->>> from pgen import getpsw
->>> getpsw(length, params)
+>>> from pgen import password
+>>> password(length, params)
 ```
 
 where `length` is password length (**int**), `params` is optional parameters (characters password should consist of).
@@ -39,10 +42,12 @@ Returns password string.
 
 #### Parameters
 
-If provided value is considered to be `False` (e.g. `False`, `0`, `[]`, `{}`, etc.) or omitted - all types of characters will be present in password (numbers, upper- and lower-case letters, special symbols). Otherwise, list or tuple of parameters should be provided:
+If provided value is considered to be `False` (e.g. `False`, `0`, `[]`, `{}`, etc.) or omitted - all types of characters will be present in password (numbers, upper- and lower-case letters, special symbols). Otherwise, list of parameters should be provided:
 
 ```python
 ['digits', 'lowercase', 'uppercase', 'punctuation']
+
+['uppercase', 'lowercase', 'digits', 'punctuation']  # order doesn't matter
 ```
 Other elements of the list will be ignored.
 
