@@ -1,31 +1,33 @@
 #!/usr/bin/env python
 
-import sys
-from random import randint as r
 from src.worker import generatePassword
 from src.worker import checkLength
+from src.worker import checkOptions
+import argparse
 
-LENGTH = 10
 
+def password(length=None, params=[]):
+    parser = argparse.ArgumentParser(description='Generate password.')
+    parser.add_argument('-L', '--length', help='length of the password')
+    parser.add_argument('-d', '--digits', action='store_true', 
+                        help='include digits')
+    parser.add_argument('-l', '--lowercase', action='store_true', 
+                        help='include lowercase characters')
+    parser.add_argument('-u', '--uppercase', action='store_true', 
+                        help='include uppercase characters')
+    parser.add_argument('-s', '--special', action='store_true', 
+                        help='include special characters')
 
-def getpsw(length=LENGTH, params=[]):
-    params_mapper = {'-d': 'digits', '-l': 'lowercase',
-                     '-u': 'uppercase', '-s': 'punctuation'}
-    for key, value in params_mapper.iteritems():
-        if key in sys.argv:
-            params.append(value)
-    if '-L' in sys.argv:
-        try:
-            length = checkLength(sys.argv[sys.argv.index('-L') + 1])
-        except IndexError:
-            length = LENGTH
-    if length <= 0:
-        length = LENGTH
-    return generatePassword(length, params)
+    args = parser.parse_args()
+    
+    if args.length: length = args.length
+    if args.digits: params.append('digits')
+    if args.lowercase: params.append('lowercase')
+    if args.uppercase: params.append('uppercase')
+    if args.special: params.append('punctuation')
+
+    return generatePassword(checkLength(length), checkOptions(params))
 
 
 if __name__ == '__main__':
-    password = getpsw()
-    print('\n')
-    print password
-    print('\n')
+    print(password())

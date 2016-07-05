@@ -2,7 +2,7 @@
 
 import unittest
 from re import findall
-from pgen import getpsw
+from pgen import password
 from string import punctuation
 from src.worker import isValid
 from src.worker import checkLength
@@ -22,30 +22,30 @@ class testGeneratePassword(unittest.TestCase):
         self.assertTrue(bool(findall('[%s]' % punctuation, password)))
 
     def test_length_of_password(self):
-        password = getpsw(10)
-        self.assertEqual(len(password), 10)
-        self.assertComplete(password)
+        result = password(10)
+        self.assertEqual(len(result), 10)
+        self.assertComplete(result)
 
     def test_length_of_password_zero(self):
-        password = getpsw(0)
-        self.assertEqual(len(password), 10)
-        self.assertComplete(password)
+        result = password(0)
+        self.assertEqual(len(result), 10)
+        self.assertComplete(result)
 
     def test_complete_options(self):
-        password = getpsw(10, self.options)
-        self.assertEqual(len(password), 10)
-        self.assertComplete(password)
+        result = password(10, self.options)
+        self.assertEqual(len(result), 10)
+        self.assertComplete(result)
 
     def test_incomplete_options(self):
-        password = getpsw(10, self.options[:2])
-        self.assertEqual(len(password), 10)
-        self.assertTrue(bool(findall('[0-9]', password)))
-        self.assertTrue(bool(findall('[a-z]', password)))
+        result = password(10, self.options[:2])
+        self.assertEqual(len(result), 10)
+        self.assertTrue(bool(findall('[0-9]', result)))
+        self.assertTrue(bool(findall('[a-z]', result)))
 
     def test_invalid_option(self):
-        password = getpsw(10, self.options_invalid)
-        self.assertEqual(len(password), 10)
-        self.assertTrue(bool(findall('[0-9]', password)))
+        result = password(10, self.options_invalid)
+        self.assertEqual(len(result), 10)
+        self.assertTrue(bool(findall('[0-9]', result)))
 
 
 class testPasswordValidator(unittest.TestCase):
